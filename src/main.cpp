@@ -5,7 +5,6 @@ void setup()
 {
   lcdSetup();
   scanSetup();
-  encoderSetup();
 }
 
 void loop()
