@@ -1,8 +1,10 @@
 #ifndef lcd_h
 #define lcd_h
 
+
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal_I2C_GY.h> //! Uniquement pour LCD de martin (pas le meme chipset) => //TODO a supprimer une fois en prod
 
 void lcdSetup();
 void lcdClear();
