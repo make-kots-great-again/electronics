@@ -6,6 +6,13 @@ void setup()
   lcdSetup();
   scanSetup();
   encoderSetup();
+  espSetup();
+}
+
+
+void loop()
+{
+  testingLoop();
 }
 
 /**
@@ -22,10 +29,5 @@ void testingLoop() {
     lcdClear();
     lcdPrint(String(checkBtnPress().time));
   };
+  
 };
-
-
-void loop()
-{
-  testingLoop();
-}
