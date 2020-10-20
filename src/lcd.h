@@ -11,5 +11,4 @@ void lcdCursor(int r, int c);
 void lcdPrint(String s);
 void lcdPrintChar(char c);
 
-
 #endif

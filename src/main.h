@@ -6,8 +6,6 @@
 
 #include "lcd.h"
 #include "scan.h"
-
+#include "encoder2.h"
 
 #endif
-
- 
