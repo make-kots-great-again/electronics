@@ -3,11 +3,15 @@
 
 void setup()
 {
+  Serial.begin(9600); //! delete after testings
   lcdSetup();
   lcdClear(); lcdPrint("Booting...");
   scanSetup();
   encoderSetup();
   espSetup();
+  lcdClear(); lcdPrint("Booting...");
+  
+  delay(1500);
   lcdClear();
 
   connectToWifi();
@@ -17,7 +21,7 @@ void setup()
 void loop()
 {
 
-  testingLoop();
+  //testingLoop();
 }
 
 /**

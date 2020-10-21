@@ -6,7 +6,7 @@ Encoder encoder(5, 6);
 
 //VARS
 encValue currentValue;
-encValue currentTurn;
+long newValue = 0;
 long oldValue = 0;
 btnValue buttonValue;
 
@@ -22,7 +22,7 @@ void encoderSetup() {
  * @return struct encValue
  */
 encValue getEncoderValue() {
-    long newValue = encoder.read()/4 - oldValue;
+    newValue = encoder.read()/4 - oldValue;
     if (newValue != currentValue.value) {
         currentValue.direction = (newValue > currentValue.value)? 1 : -1;
         currentValue.value = newValue;

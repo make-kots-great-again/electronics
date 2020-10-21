@@ -27,10 +27,8 @@ void lcdCursor(int r, int c){
     lcd.setCursor(c,r);
 }
 
-void lcdScroll(){
-    lcd.autoscroll();
-}
-
-void lcdNoScroll(){
-    lcd.noAutoscroll();
+void lcdClearLine(int r){
+    lcd.setCursor(0,r);
+    lcd.print("                ");
+    lcd.setCursor(0,r);
 }

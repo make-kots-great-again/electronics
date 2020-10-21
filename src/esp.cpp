@@ -26,7 +26,7 @@ networks listNetworks()
     }
     else
     {   
-        numSsid > maxNumberOfNetworks ? numSsid = maxNumberOfNetworks : NULL;
+        numSsid = (numSsid > maxNumberOfNetworks)? maxNumberOfNetworks : numSsid;
         networks.nets = numSsid;
         for( int net = 0; net < numSsid; net++ ){
             networks.SSID[net]= WiFi.SSID(net);
