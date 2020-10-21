@@ -4,14 +4,19 @@
 void setup()
 {
   lcdSetup();
+  lcdClear(); lcdPrint("Booting...");
   scanSetup();
   encoderSetup();
   espSetup();
+  lcdClear();
+
+  connectToWifi();
 }
 
 
 void loop()
 {
+
   testingLoop();
 }
 

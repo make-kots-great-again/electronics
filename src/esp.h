@@ -3,6 +3,17 @@
 
 #include "WiFiEsp.h"
 
+const int maxNumberOfNetworks = 50;
+
+typedef struct networks
+{
+    String SSID[maxNumberOfNetworks];
+    int RSSI[maxNumberOfNetworks];
+    int nets = 0;
+} networks;
+
 void espSetup();
+networks listNetworks();
+boolean connectToNetwork(String SSID, String pwd);
 
 #endif

@@ -7,6 +7,7 @@ typedef struct encValue
 {
     boolean hasChanged = false;
     long value = 0;
+    int direction = 0;
 } encValue;
 
 typedef struct btnValue

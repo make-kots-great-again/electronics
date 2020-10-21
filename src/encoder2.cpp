@@ -6,6 +6,7 @@ Encoder encoder(5, 6);
 
 //VARS
 encValue currentValue;
+encValue currentTurn;
 long oldValue = 0;
 btnValue buttonValue;
 
@@ -23,6 +24,7 @@ void encoderSetup() {
 encValue getEncoderValue() {
     long newValue = encoder.read()/4 - oldValue;
     if (newValue != currentValue.value) {
+        currentValue.direction = (newValue > currentValue.value)? 1 : -1;
         currentValue.value = newValue;
         currentValue.hasChanged = true;
     }

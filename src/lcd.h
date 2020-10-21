@@ -10,5 +10,7 @@ void lcdClear();
 void lcdCursor(int r, int c);
 void lcdPrint(String s);
 void lcdPrintChar(char c);
+void lcdScroll();
+void lcdNoScroll();
 
 #endif
