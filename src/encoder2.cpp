@@ -23,6 +23,7 @@ void encoderSetup() {
 encValue getEncoderValue() {
     long newValue = encoder.read()/4 - oldValue;
     if (newValue != currentValue.value) {
+        currentValue.direction = (newValue > currentValue.value)? 1 : -1;
         currentValue.value = newValue;
         currentValue.hasChanged = true;
     }
