@@ -6,6 +6,7 @@
 #include "encoder2.h"
 #include "scan.h"
 
-int getQuantity();
+int setQuantity();
+int setPeremption();
 int test();
 #endif
