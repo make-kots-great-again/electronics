@@ -3,7 +3,7 @@
 
 #include "esp.h"
 #include "lcd.h"
-#include "encoder2.h"
+#include "encoder.h"
 
 void connectToWifi();
 String getPassword();
