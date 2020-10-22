@@ -3,7 +3,7 @@
 
 #include "esp.h"
 #include "lcd.h"
-#include "encoder2.h"
+#include "encoder.h"
 #include "scan.h"
 
 int setQuantity();

@@ -9,6 +9,7 @@
 #include "encoder.h"
 #include "esp.h"
 #include "product.h"
+#include "wifi_connection.h"
 void testingLoop();
 
 #endif
