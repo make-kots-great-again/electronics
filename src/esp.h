@@ -14,6 +14,6 @@ typedef struct networks
 
 void espSetup();
 networks listNetworks();
-boolean connectToNetwork(String SSID, String pwd);
+int connectToNetwork(String SSID, String pwd);
 
 #endif

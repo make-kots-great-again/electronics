@@ -9,12 +9,13 @@ void setup()
   scanSetup();
   encoderSetup();
   espSetup();
-  lcdClear(); lcdPrint("Booting...");
+  eepromDataSetup();
   
   delay(1500);
   lcdClear();
 
   connectToWifi();
+
 }
 
 
