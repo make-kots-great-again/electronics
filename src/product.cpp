@@ -1,4 +1,10 @@
 #include "product.h"
+
+/**
+ * Fonction qui demande à l'utilisateur de mettre la quantité de produit 
+ * qu'il souhaite envoyer.
+ * @return int compt
+ */
 int getQuantity() {
     int compt = 0 ;
     encValue enc;
