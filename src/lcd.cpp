@@ -9,7 +9,6 @@ void lcdSetup() {
     lcd.backlight();       
     lcd.noAutoscroll();
     lcd.setCursor(0, 0); 
-    lcd.print("Ready");
 };
 
 void lcdPrint(String s){
@@ -25,5 +24,11 @@ void lcdClear(){
 };
 
 void lcdCursor(int r, int c){
-    lcd.setCursor(r,c);
+    lcd.setCursor(c,r);
+}
+
+void lcdClearLine(int r){
+    lcd.setCursor(0,r);
+    lcd.print("                ");
+    lcd.setCursor(0,r);
 }

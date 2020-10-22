@@ -1,11 +1,12 @@
-#include "encoder2.h"
+#include "encoder.h"
 
 // PINS
-Encoder encoder(5, 6);
+RotaryEncoder encoder(A2, A3);
 #define btn 4   
 
 //VARS
 encValue currentValue;
+long newValue = 0;
 long oldValue = 0;
 btnValue buttonValue;
 
@@ -20,8 +21,9 @@ void encoderSetup() {
  * Fonction détectant la rotation de l'encodeur et renvoie sa valeur.
  * @return struct encValue
  */
-encValue getEncoderValue() {
-    long newValue = encoder.read()/4 - oldValue;
+encValue getEncoderValue(){
+    encoder.tick();
+    newValue = encoder.getPosition() - oldValue;
     if (newValue != currentValue.value) {
         currentValue.direction = (newValue > currentValue.value)? 1 : -1;
         currentValue.value = newValue;
@@ -30,14 +32,14 @@ encValue getEncoderValue() {
     else{
         currentValue.hasChanged = false;
     }
-    return currentValue;
+    return currentValue;   
 }
 
 /**
  * Fonction remettant à 0 la valeur du compteur de l'encodeur.
  */
 void resetEncoderValue() {
-    oldValue = encoder.read()/4;
+    oldValue = encoder.getPosition();
 }
 
 /**
@@ -57,3 +59,6 @@ btnValue checkBtnPress(){
     }
     return buttonValue;
 }
+
+
+

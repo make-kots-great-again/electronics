@@ -1,7 +1,7 @@
 #ifndef encoder2_h
 #define encoder2_h
 
-#include <Encoder.h>
+#include <RotaryEncoder.h>
 
 typedef struct encValue
 {

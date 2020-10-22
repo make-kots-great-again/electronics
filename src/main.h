@@ -6,8 +6,9 @@
 
 #include "lcd.h"
 #include "scan.h"
-#include "encoder2.h"
+#include "encoder.h"
 #include "esp.h"
+#include"wifi_connection.h"
 
 void testingLoop();
 
