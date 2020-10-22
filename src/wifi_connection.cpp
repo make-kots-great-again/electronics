@@ -2,7 +2,13 @@
 
 networks nets;
 
-void connectToWifi()
+void connectToWifi(){
+    if(!autoConnect()){
+        newWifiCon();
+    }
+}
+
+void newWifiCon()
 {
     lcdClear();
     lcdPrint("Recherche de PA");
@@ -40,9 +46,11 @@ void connectToWifi()
         {
             if (checkBtnPress().time < 1000)
             {   String net = nets.SSID[netIndex];
-                int  connStatus = connectToNetwork(net, getPassword(net));
+                String pass = getPassword(net);
+                int  connStatus = connectToNetwork(net, pass);
                 if (connStatus == 1)
                 {
+                    eepromSetSSID_PWD(net,pass);
                     //Connection réussie
                     lcdClear();
                     lcdPrint("Conn. reussie!");
@@ -125,6 +133,7 @@ String getPassword(String ssid)
                 }
                 else{
                     pwd += choices[charIndex];
+                    delay(100); //débounce
                 }
             }
             else
@@ -157,4 +166,70 @@ void printCurrentChar(int index){
     lcdPrintCustomChar(0);
     lcdCursor(1,9);
     lcdPrint(rightChoices);
+}
+
+
+boolean autoConnect(){
+    if(eepromGetSSID() != ""){
+        if(askAutoConnect()){
+            lcdClear(); lcdPrint("Connection a :");
+            lcdCursor(1,0); lcdPrint(eepromGetSSID());
+            int  connStatus = connectToNetwork(eepromGetSSID(), eepromGetPWD());
+            if (connStatus == 1)
+            {
+                //Connection réussie
+                lcdClear();
+                lcdPrint("Conn. reussie!");
+                delay(2500);
+                lcdClear();
+                return true;
+            }
+            else if (connStatus == -1)
+            {
+                //Connection échouée
+                lcdClear();
+                lcdPrint("Conn. echouee!");
+                delay(2500);
+                lcdClear();
+                return false;
+            }
+        }
+        return false;
+    }    
+    return false;
+}
+
+boolean askAutoConnect(){
+    String yesNo = "Y";
+    encValue enc;
+    lcdClear();
+    lcdPrint("Auto-connect ? ");
+    lcdCursor(1,11); lcdPrint("N");
+    lcdCursor(1,4); lcdPrint("Y");
+    lcdCursor(1,4); lcdShowCursor(true); 
+    while(true){
+        if (!checkBtnPress().wasPressed)
+            {
+                enc = getEncoderValue();
+                if (enc.hasChanged)
+                {
+                    if (enc.direction == 1)
+                    {
+                        lcdCursor(1,11);
+                        yesNo = "N";
+                    }
+                    else if (enc.direction == -1)
+                    {
+                        lcdCursor(1,4);
+                        yesNo = "Y";
+                    }
+                }
+            }
+        else
+        {
+            lcdShowCursor(false);
+            return (yesNo == "Y")? true : false;
+            break;
+        }
+    }
 }
