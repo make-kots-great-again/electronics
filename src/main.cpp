@@ -13,7 +13,7 @@ void setup()
 void loop()
 {
   //test();
-  getQuantity();
+  setQuantity();
   //testingLoop();
 }
 

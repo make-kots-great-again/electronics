@@ -5,7 +5,7 @@
  * qu'il souhaite envoyer.
  * @return int compt
  */
-int getQuantity() {
+int setQuantity() {
     int compt(0) ;
     encValue enc;
 
@@ -42,11 +42,24 @@ int getQuantity() {
         };   
     };
 }
-int getPeremption(){
-    int jour;
-    int mois;
-    int annee;
+/**
+ * Fonction qui demande à l'utilisateur de mettre la date de péremption
+ * du produit qu'il a entré
+ * @return int compt
+ */
+int setPeremption(){
+    int jour(0);
+    int mois(0);
+    int annee(0);
 
+    encValue enc;
+    enc = getEncoderValue();
+    if (enc.hasChanged) {
+        //TODO
+    }
+    if (checkBtnPress().wasPressed) {
+        //TODO
+    }
     return 0;
 }
 int test(){
