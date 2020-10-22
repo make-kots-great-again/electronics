@@ -6,5 +6,6 @@
 #include "encoder2.h"
 
 void connectToWifi();
+String getPassword();
 
 #endif
