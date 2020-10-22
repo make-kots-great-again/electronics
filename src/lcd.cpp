@@ -32,3 +32,7 @@ void lcdClearLine(int r){
     lcd.print("                ");
     lcd.setCursor(0,r);
 }
+
+void lcdShowCursor(boolean show){
+    (show)? lcd.cursor_on() : lcd.cursor_off();
+}

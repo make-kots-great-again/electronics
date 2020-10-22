@@ -6,6 +6,8 @@
 #include "encoder.h"
 
 void connectToWifi();
-String getPassword();
+String getPassword(String ssid);
+void printCurrentNet(int index);
+void printCurrentChar(int index);
 
 #endif
