@@ -5,7 +5,7 @@ void connectToWifi()
     lcdPrint("Recherche de PA");
     networks networks = listNetworks();
     lcdClear();
-    lcdPrint("Choose Network:");
+    lcdPrint("Choix PA :");
     lcdCursor(1, 0);
     lcdPrint(networks.SSID[0]);
 
@@ -15,20 +15,20 @@ void connectToWifi()
     {
         if (!checkBtnPress().wasPressed)
         {
-            //TODO a verifier une fois composants souder!
             enc = getEncoderValue();
             if (enc.hasChanged)
             {
-                Serial.println(enc.direction);
                 if (enc.direction == 1)
                 {
                     netIndex = (netIndex < networks.nets - 1) ? netIndex + 1 : netIndex;
+                    Serial.println(netIndex);
                     lcdClearLine(1);
                     lcdPrint(networks.SSID[netIndex]);
                 }
                 else if (enc.direction == -1)
                 {
                     netIndex = (netIndex > 0) ? netIndex - 1 : netIndex;
+                    Serial.println(netIndex);
                     lcdClearLine(1);
                     lcdPrint(networks.SSID[netIndex]);
                 }
