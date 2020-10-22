@@ -8,7 +8,7 @@
 #include "scan.h"
 #include "encoder2.h"
 #include "esp.h"
-
+#include "product.h"
 void testingLoop();
 
 #endif

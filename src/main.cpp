@@ -12,7 +12,9 @@ void setup()
 
 void loop()
 {
-  testingLoop();
+  //test();
+  getQuantity();
+  //testingLoop();
 }
 
 /**
