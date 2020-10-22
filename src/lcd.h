@@ -12,5 +12,6 @@ void lcdPrint(String s);
 void lcdPrintChar(char c);
 void lcdClearLine(int r);
 void lcdShowCursor(boolean show);
+void lcdPrintCustomChar(byte id);
 
 #endif

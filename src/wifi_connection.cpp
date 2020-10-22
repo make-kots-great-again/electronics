@@ -76,7 +76,14 @@ void connectToWifi()
     }
 }
 
-String choices = "        0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ _-?!,.:;%#*<>+=        ";
+char confirmChar=0x00+126;
+String confirm = String(confirmChar);
+String choices = "        " + confirm
+    + "0123456789" + confirm
+    + "abcdefghijklmnopqrstuvwxyz" + confirm
+    + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + confirm
+    + " _-?!,.:;%#*<>+=" + confirm
+    + "        ";
 
 String getPassword(String ssid)
 {
@@ -111,13 +118,13 @@ String getPassword(String ssid)
         {
             if (checkBtnPress().time < 1000)
             {
-                if (choices[charIndex] == '•'){
+                if (choices[charIndex] == confirmChar){
                     lcdClear(); lcdPrint("Connection a :");
                     lcdCursor(1,0); lcdPrint(ssid);
-                    Serial.println(pwd);
+                    break;
                 }
                 else{
-                    pwd += choices[charIndex]; //TODO replace 0 by value
+                    pwd += choices[charIndex];
                 }
             }
             else
@@ -136,15 +143,18 @@ void printCurrentNet(int index){
     lcdPrint(nets.SSID[index]);
 }
 
-void printCurrentChar(int index){
-    //TODO highlight character 
+void printCurrentChar(int index){ 
     String leftChoices = choices.substring(index-6,index);
     String rightChoices = choices.substring(index+1,index+8);
     lcdClearLine(1);
     lcdCursor(1,0);
     lcdPrint(leftChoices);
+    lcdCursor(1,6);
+    lcdPrintCustomChar(1);
     lcdCursor(1,7);
     lcdPrintChar(choices[index]);
+    lcdCursor(1,8);
+    lcdPrintCustomChar(0);
     lcdCursor(1,9);
     lcdPrint(rightChoices);
 }
