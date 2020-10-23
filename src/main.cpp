@@ -1,8 +1,8 @@
 #include <main.h>
 
 
-void setup()
-{
+void setup(){
+
   Serial.begin(9600); //! delete after testings
   lcdSetup();
   lcdClear(); lcdPrint("Booting...");
@@ -13,16 +13,17 @@ void setup()
   
   delay(1500);
   lcdClear();
-
-  connectToWifi();
-
+  
+  //connectToWifi();
+  //setQuantity();
 }
 
 
 void loop()
 {
+  setPeremption();
   //test();
-  setQuantity();
+  //setQuantity();
   //testingLoop();
 }
 

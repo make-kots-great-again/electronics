@@ -9,4 +9,6 @@
 int setQuantity();
 int setPeremption();
 int test();
+int setJMA();
+boolean askConfirmation();
 #endif
