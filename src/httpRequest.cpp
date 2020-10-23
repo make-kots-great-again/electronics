@@ -13,6 +13,12 @@ httpResp res;
 //TODO replace JWT with real jwt from EEPROM 
 const String JWT = "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbWVzQGdtYWlsLmNvbSIsInVzZXJJZCI6ImEzZTg3OGY1LWNiOGUtNGUzYi05MGM0LWVlOGY4MDU0MDc3YyIsImlhdCI6MTYwMzQ2NTI4OCwiZXhwIjoxNjA0MDcwMDg4fQ.k2s5Bp0tE95Pmn71D7IitG4weigt1R-LYwlAjcr2lDQ";
 
+/**
+ * Fonction permettant d'envoyer une requête GET à notre serveur à un endpoint donnée.
+ * @param {String} endpint - de la requête api
+ * @param {boolean} withAuth - (OPTIONNEL) si true, ajout du header "Authorization JWT"
+ * @return {httpResp} voir doc de la structure
+ */
 httpResp apiGET(String endPoint, boolean withAuth = false){
     String reqHeaders = "GET https://"+ String(serverURL) + apiURL + endPoint + " HTTP/1.1" + endLine;
     reqHeaders += "Connection: keep-alive" + endLine;
@@ -30,6 +36,13 @@ httpResp apiGET(String endPoint, boolean withAuth = false){
     return res;
 }
 
+/**
+ * Fonction permettant d'envoyer une requête POST à notre serveur à un endpoint donnée.
+ * @param {String} endpint - de la requête api
+ * @param {String} jsonData - les données à envoyer en format JSON
+ * @param {boolean} withAuth - (OPTIONNEL) si true, ajout du header "Authorization JWT"
+ * @return {httpResp} voir doc de la structure
+ */
 httpResp apiPOST(String endPoint, String jsonData, boolean withAuth = false){
     String reqHeaders = "POST https://"+ String(serverURL) + apiURL + endPoint + " HTTP/1.1" + endLine;
     reqHeaders += "Connection: keep-alive" + endLine;

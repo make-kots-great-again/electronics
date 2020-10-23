@@ -3,6 +3,11 @@
 
 #include "esp.h"
 
+/**
+ * @param {unsigned-int} status - le statut de la requête: 200,404,500,...
+ * @param {String} message - le message associé au statut  
+ * @param {String} body - la réponse en elle-même 
+ */
 typedef struct httpResp {
     unsigned int status;
     String message;
