@@ -7,8 +7,8 @@
 #include "scan.h"
 
 int setQuantity();
-int setPeremption();
+int peremption();
 int test();
-int setJMA();
+int setPeremption();
 boolean askConfirmation();
 #endif

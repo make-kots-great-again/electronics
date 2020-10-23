@@ -51,10 +51,10 @@ int setQuantity() {
  * du produit qu'il a entré
  * @return int compt
  */
-int setPeremption(){
+int peremption(){
 
     int date;
-    date = setJMA();
+    date = setPeremption();
     lcdClear();
     lcdPrint("confirmation ?");
     lcdCursor(1,0);
@@ -66,7 +66,7 @@ int setPeremption(){
         return date;
     }
     else{
-        setPeremption();
+        peremption();
     }
     return date;
 }
@@ -74,7 +74,7 @@ int test(){
    
 }
 
-int setJMA(){
+int setPeremption(){
     int compt(1);
     encValue enc;
 
@@ -94,26 +94,13 @@ int setJMA(){
             lcdPrint(String(compt)+" jour(s)");
         };
         if(checkBtnPress().wasPressed) {
-            if(checkBtnPress().time < 1000){
-                if (compt<0){
-                    compt = 0;
-                };
-                lcdClear();
-                lcdPrint("ok !");
-                delay(1000);
-                resetEncoderValue();
-                return compt;
-                break;
-            }
-            else{
-                lcdClear();
-                resetEncoderValue();
-                lcdPrint("Annulation");
-                delay(2500);
-            };   
+            lcdClear();
+            lcdPrint("ok !");
+            delay(1000);
+            resetEncoderValue();
+            return compt;           
         };
     }   
-    
     return compt;
 }
 

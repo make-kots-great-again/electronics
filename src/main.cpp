@@ -21,7 +21,7 @@ void setup(){
 
 void loop()
 {
-  setPeremption();
+  peremption();
   //test();
   //setQuantity();
   //testingLoop();
