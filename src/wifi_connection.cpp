@@ -53,7 +53,9 @@ void newWifiCon()
                     eepromSetSSID_PWD(net,pass);
                     //Connection réussie
                     lcdClear();
-                    lcdPrint("Conn. reussie!");
+                    lcdPrint("Connection");
+                    lcdCursor(1,9);
+                    lcdPrint("reussie");
                     delay(2500);
                     lcdClear();
                     break;
@@ -62,7 +64,9 @@ void newWifiCon()
                 {
                     //Connection échouée
                     lcdClear();
-                    lcdPrint("Conn. echouee!");
+                    lcdPrint("Connection");
+                    lcdCursor(1,9);
+                    lcdPrint("echouee");
                     delay(2500);
                     lcdClear();
                     connectToWifi();
@@ -179,7 +183,9 @@ boolean autoConnect(){
             {
                 //Connection réussie
                 lcdClear();
-                lcdPrint("Conn. reussie!");
+                lcdPrint("Connection");
+                lcdCursor(1,9);
+                lcdPrint("reussie");
                 delay(2500);
                 lcdClear();
                 return true;
@@ -188,7 +194,9 @@ boolean autoConnect(){
             {
                 //Connection échouée
                 lcdClear();
-                lcdPrint("Conn. echouee!");
+                lcdPrint("Connection");
+                lcdCursor(1,9);
+                lcdPrint("echouee");
                 delay(2500);
                 lcdClear();
                 return false;

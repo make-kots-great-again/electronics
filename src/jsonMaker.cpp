@@ -1,0 +1,25 @@
+#include "jsonMaker.h"
+
+
+String makeJsonString(DynamicJsonDocument obj){
+
+    String jsonString = "";
+    serializeJson(obj, jsonString);
+
+    return jsonString;
+}
+
+/**
+ * Fonction transformant un string JSON en objet.
+ * @param String: Le string JSON qui doit être convertit 
+ *  !!! ATTENTION !!! le string JSON doit être au format {"key":"value"} et non [{"key:value"}]!
+ * @return DynamicJsonDocument: object manipulable 
+ *      -> String value = obj["key"];
+ */
+DynamicJsonDocument getObject(String jsonString){
+    
+    DynamicJsonDocument obj(1024);
+    deserializeJson(obj, jsonString);
+
+    return obj;
+}

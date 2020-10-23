@@ -54,6 +54,11 @@ size_t WiFiEspClient::println(const __FlashStringHelper *ifsh)
 }
 
 
+uint16_t WiFiEspClient::remotePort()
+{
+	return EspDrv::getRemotePort();  
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Implementation of Client virtual methods
 ////////////////////////////////////////////////////////////////////////////////
@@ -66,7 +71,7 @@ int WiFiEspClient::connectSSL(const char* host, uint16_t port)
 int WiFiEspClient::connectSSL(IPAddress ip, uint16_t port)
 {
 	char s[16];
-	sprintf_P(s, PSTR("%d.%d.%d.%d"), ip[0], ip[1], ip[2], ip[3]);
+	sprintf(s, "%d.%d.%d.%d", ip[0], ip[1], ip[2], ip[3]);
 	return connect(s, port, SSL_MODE);
 }
 
@@ -78,7 +83,7 @@ int WiFiEspClient::connect(const char* host, uint16_t port)
 int WiFiEspClient::connect(IPAddress ip, uint16_t port)
 {
 	char s[16];
-	sprintf_P(s, PSTR("%d.%d.%d.%d"), ip[0], ip[1], ip[2], ip[3]);
+	sprintf(s, "%d.%d.%d.%d", ip[0], ip[1], ip[2], ip[3]);
 
 	return connect(s, port, TCP_MODE);
 }
@@ -99,7 +104,7 @@ int WiFiEspClient::connect(const char* host, uint16_t port, uint8_t protMode)
     }
 	else
 	{
-    	LOGERROR(F("No socket available"));
+    	Serial.println(F("No socket available"));
     	return 0;
     }
     return 1;

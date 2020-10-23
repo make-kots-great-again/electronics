@@ -127,7 +127,8 @@ public:
   * Returns the remote IP address.
   */
   IPAddress remoteIP();
-  
+  uint16_t remotePort();
+
 
   friend class WiFiEspServer;
 
