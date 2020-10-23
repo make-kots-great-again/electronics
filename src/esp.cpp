@@ -25,7 +25,7 @@ networks listNetworks()
        return networks;
     }
     else
-    {   
+    {   //TODO vérifier si le réseau n'as pas déjà été ajouté!
         numSsid = (numSsid > maxNumberOfNetworks)? maxNumberOfNetworks : numSsid;
         networks.nets = numSsid;
         for( int net = 0; net < numSsid; net++ ){
@@ -40,10 +40,16 @@ networks listNetworks()
  * Fonction permettant de se connecter à un certain réseau wifi.
  * @param SSID:String Le nom du réseau.
  * @param PWD:String Le mot de passe du réseau (WPA2).
- * @return boolean: true si la connection a réussie, false si non. 
+ * @return int: 
+ *              1   si la connection a réussie
+ *              -1  si la connection a échouée
+ *              0   si l'opération a été annulée 
  */
-boolean connectToNetwork(String SSID, String PWD)
+int connectToNetwork(String SSID, String PWD)
 {
+    if (PWD == "0"){
+        return 0;
+    }
     char ssid[1000]; SSID.toCharArray(ssid,1000);
     char pass[1000]; PWD.toCharArray(pass,1000);
     int status = WL_IDLE_STATUS; //statut de la connection
@@ -52,5 +58,5 @@ boolean connectToNetwork(String SSID, String PWD)
         status = WiFi.begin(ssid, pass);
         connAttempts ++;
     }
-    return (status != WL_CONNECTED) ? false : true; 
+    return (status != WL_CONNECTED) ? -1 : 1; 
 }
