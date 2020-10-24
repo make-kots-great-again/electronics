@@ -1,10 +1,10 @@
 #ifndef product_h
 #define product_h
 
-#include "esp.h"
-#include "lcd.h"
-#include "encoder.h"
-#include "scan.h"
+#include "helpers/esp.h"
+#include "helpers/lcd.h"
+#include "helpers/encoder.h"
+#include "helpers/scan.h"
 
 int setQuantity();
 int peremption();
