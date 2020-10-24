@@ -1,6 +1,6 @@
 #include "lcd.h"
 
-#if (ENV_MARTIN)
+#if ENV_MARTIN == true
     #include <LiquidCrystal_I2C_GY.h>
     LiquidCrystal_I2C_GY lcd(0x38,16,2);
 #else

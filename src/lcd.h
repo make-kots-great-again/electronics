@@ -3,7 +3,11 @@
 
 #include <Arduino.h>
 
-#define ENV_MARTIN  true
+#if __has_include("envMartin.h")
+    #define ENV_MARTIN  true
+#else
+    #define ENV_MARTIN  false
+#endif
 
 void lcdSetup();
 void lcdClear();
