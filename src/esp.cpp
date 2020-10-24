@@ -45,7 +45,7 @@ networks listNetworks()
  */
 int connectToNetwork(String SSID, String PWD)
 {
-    if (PWD == "0"){
+    if (PWD == "-1"){
         return 0;
     }
     char ssid[1000]; SSID.toCharArray(ssid,1000);

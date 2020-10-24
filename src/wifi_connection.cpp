@@ -142,7 +142,7 @@ String getPassword(String ssid)
             }
             else
             {
-                pwd = "0"; //annulation de la tentative de connection
+                pwd = "-1"; //annulation de la tentative de connection
                 break;
             }
         }
@@ -165,7 +165,7 @@ void printCurrentChar(int index){
     lcdCursor(1,6);
     lcdPrintCustomChar(1);
     lcdCursor(1,7);
-    lcdPrintChar(choices[index]);
+    lcdPrint(choices[index]);
     lcdCursor(1,8);
     lcdPrintCustomChar(0);
     lcdCursor(1,9);
