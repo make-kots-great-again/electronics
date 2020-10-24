@@ -15,13 +15,13 @@ void setup(){
   lcdClear();
   
   //connectToWifi();
-  //setQuantity();
+  setQuantity();
 }
 
 
 void loop()
 {
-  peremption();
+  //peremption();
   //test();
   //setQuantity();
   //testingLoop();

@@ -5,42 +5,40 @@
  * qu'il souhaite envoyer.
  * @return int compt
  */
-int setQuantity() {
-    int compt(0) ;
+int setQuantity()
+{
+    int compt(0);
     encValue enc;
-    while(true){
+    while (true)
+    {
         enc = getEncoderValue();
-        if (enc.hasChanged) {
-        lcdClear();
+        if (enc.hasChanged)
+        {
+            lcdClear();
             compt = enc.value;
-            if (enc.value < 0){
+            if (enc.value < 0)
+            {
                 resetEncoderValue();
             }
-            else{
+            else
+            {
                 compt = enc.value;
             }
-            lcdPrint("Quantity: "+String(compt));    
+            lcdPrint("Quantity: " + String(compt));
         };
-        if (checkBtnPress().wasPressed) {
-            if(checkBtnPress().time < 1000){
-                lcdClear();               
-                lcdPrint("envoi!");
-                delay(1000);
+        if (checkBtnPress().wasPressed)
+        {
+            if (askConfirmation())
+            {
                 lcdClear();
-                if (compt<0){
-                    compt = 0;
-                };
-                resetEncoderValue();
+                lcdPrint("envoi !");
                 return compt;
             }
-            else{
-                lcdClear();
-                resetEncoderValue();
-                lcdPrint("Annulation");
-                delay(2500);
-            };   
+            else
+            {
+                peremption();
+            }
         };
-
     };
 
     return compt;
@@ -51,90 +49,103 @@ int setQuantity() {
  * du produit qu'il a entré
  * @return int compt
  */
-int peremption(){
+int peremption()
+{
 
     int date;
     date = setPeremption();
     lcdClear();
     lcdPrint("confirmation ?");
-    lcdCursor(1,0);
+    lcdCursor(1, 0);
     lcdPrint(String(date));
     delay(2500);
-    if (askConfirmation()){
+    if (askConfirmation())
+    {
         lcdClear();
         lcdPrint("envoi !");
         return date;
     }
-    else{
+    else
+    {
         peremption();
     }
     return date;
 }
-int test(){
-   
+int test()
+{
 }
 
-int setPeremption(){
+int setPeremption()
+{
     int compt(1);
     encValue enc;
 
-    while(true){
-        enc = getEncoderValue(); 
-        if (enc.hasChanged) {
+    while (true)
+    {
+        enc = getEncoderValue();
+        if (enc.hasChanged)
+        {
             lcdClear();
             compt = enc.value + 1;
-            if (enc.value < 0){
+            if (enc.value < 0)
+            {
                 resetEncoderValue();
             }
-            else{
+            else
+            {
                 compt = enc.value + 1;
-            }           
+            }
             lcdPrint("Peremption dans:");
-            lcdCursor(1,0);
-            lcdPrint(String(compt)+" jour(s)");
+            lcdCursor(1, 0);
+            lcdPrint(String(compt) + " jour(s)");
         };
-        if(checkBtnPress().wasPressed) {
+        if (checkBtnPress().wasPressed)
+        {
             lcdClear();
             lcdPrint("ok !");
             delay(1000);
             resetEncoderValue();
-            return compt;           
+            return compt;
         };
-    }   
+    }
     return compt;
 }
 
-
-boolean askConfirmation(){
+boolean askConfirmation()
+{
     String yesNo = "Y";
     encValue enc;
     lcdClear();
     lcdPrint("Confirmation ");
-    lcdCursor(1,11); lcdPrint("N");
-    lcdCursor(1,4); lcdPrint("Y");
-    lcdCursor(1,4); lcdShowCursor(true); 
-    while(true){
+    lcdCursor(1, 11);
+    lcdPrint("N");
+    lcdCursor(1, 4);
+    lcdPrint("Y");
+    lcdCursor(1, 4);
+    lcdShowCursor(true);
+    while (true)
+    {
         if (!checkBtnPress().wasPressed)
+        {
+            enc = getEncoderValue();
+            if (enc.hasChanged)
             {
-                enc = getEncoderValue();
-                if (enc.hasChanged)
+                if (enc.direction == 1)
                 {
-                    if (enc.direction == 1)
-                    {
-                        lcdCursor(1,11);
-                        yesNo = "N";
-                    }
-                    else if (enc.direction == -1)
-                    {
-                        lcdCursor(1,4);
-                        yesNo = "Y";
-                    }
+                    lcdCursor(1, 11);
+                    yesNo = "N";
+                }
+                else if (enc.direction == -1)
+                {
+                    lcdCursor(1, 4);
+                    yesNo = "Y";
                 }
             }
+        }
         else
         {
             lcdShowCursor(false);
-            return (yesNo == "Y")? true : false;
+            return (yesNo == "Y") ? true : false;
             break;
         }
     }
