@@ -19,7 +19,7 @@ void encoderSetup() {
 
 /**
  * Fonction détectant la rotation de l'encodeur et renvoie sa valeur.
- * @return struct encValue
+ * @return {encValue}  - voir doc de la structure
  */
 encValue getEncoderValue(){
     encoder.tick();
@@ -45,7 +45,7 @@ void resetEncoderValue() {
 /**
  * Fonction détectant l'appui sur le bouton de l'encodeur et renvoie le temps
  * que le bouton a été appuyé en ms.
- * @return struct btnValue
+ * @return {btnValue} voir doc de la structure
  */
 btnValue checkBtnPress(){
     buttonValue.wasPressed = false;

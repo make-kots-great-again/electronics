@@ -74,6 +74,7 @@ public:
 	 * Set the LCD display in the correct begin state, must be called before anything else is done.
 	 */
 	void begin();
+	void init();
 
 	 /**
 	  * Remove all the characters currently shown. Next print/write operation will start

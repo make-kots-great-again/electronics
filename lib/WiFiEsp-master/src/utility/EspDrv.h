@@ -128,13 +128,13 @@ public:
      * param ssid: Pointer to the SSID string.
      * param passphrase: Passphrase. Valid characters in a passphrase must be between ASCII 32-126 (decimal).
      */
-    static bool wifiConnect(const char* ssid, const char* passphrase);
+    static bool wifiConnect(char* ssid, const char *passphrase);
 
 
     /*
 	* Start the Access Point
 	*/
-	static bool wifiStartAP(const char* ssid, const char* pwd, uint8_t channel, uint8_t enc, uint8_t espMode);
+	static bool wifiStartAP(char* ssid, const char* pwd, uint8_t channel, uint8_t enc, uint8_t espMode);
 
 
     /*
@@ -175,6 +175,7 @@ public:
      * return: copy the ip address value in IPAddress object
      */
     static void getIpAddress(IPAddress& ip);
+	static void getLocalIpAddress(IPAddress& ip);
 
 	static void getIpAddressAP(IPAddress& ip);
 
@@ -291,7 +292,7 @@ private:
 	static long _bufPos;
 	static uint8_t _connId;
 
-	static uint16_t _remotePort;
+	static uint16_t _remotePort, _Timeout;
 	static uint8_t  _remoteIp[WL_IPV4_LENGTH];
 
 
@@ -322,7 +323,7 @@ private:
 	static bool sendCmdGet(const __FlashStringHelper* cmd, const char* startTag, const char* endTag, char* outStr, int outStrLen);
 	static bool sendCmdGet(const __FlashStringHelper* cmd, const __FlashStringHelper* startTag, const __FlashStringHelper* endTag, char* outStr, int outStrLen);
 
-	static int readUntil(unsigned int timeout, const char* tag=NULL, bool findTags=true);
+	static int readUntil(int timeout, const char* tag=NULL, bool findTags=true);
 
 	static void espEmptyBuf(bool warn=true);
 

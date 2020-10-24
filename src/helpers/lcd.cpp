@@ -1,7 +1,12 @@
 #include "lcd.h"
 
-LiquidCrystal_I2C lcd(0x27, 16, 2);
-//LiquidCrystal_I2C_GY lcd(0x38,16,2); //! Uniquement pour LCD de martin (pas le meme chipset)
+#if ENV_MARTIN == true
+    #include <LiquidCrystal_I2C_GY.h>
+    LiquidCrystal_I2C_GY lcd(0x38,16,2);
+#else
+    #include <LiquidCrystal_I2C.h>
+    LiquidCrystal_I2C lcd(0x27, 16, 2);
+#endif
 
 byte rightBar[8] = {
   B00001,
@@ -26,8 +31,8 @@ byte leftBar[8] = {
 
 
 void lcdSetup() {
-    lcd.begin();
-    //lcd.init(); //! Uniquement pour LCD de martin (pas le meme chipset)
+    lcd.init();
+    //lcd.begin();
     lcd.backlight();       
     lcd.noAutoscroll();
     lcd.setCursor(0, 0); 
@@ -39,7 +44,7 @@ void lcdPrint(String s){
     lcd.print(s);
 };
 
-void lcdPrintChar(char c){
+void lcdPrint(char c){
     lcd.print(c);
 };
 

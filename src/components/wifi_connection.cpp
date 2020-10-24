@@ -53,7 +53,9 @@ void newWifiCon()
                     eepromSetSSID_PWD(net,pass);
                     //Connection réussie
                     lcdClear();
-                    lcdPrint("Conn. reussie!");
+                    lcdPrint("Connection");
+                    lcdCursor(1,9);
+                    lcdPrint("reussie");
                     delay(2500);
                     lcdClear();
                     break;
@@ -62,7 +64,9 @@ void newWifiCon()
                 {
                     //Connection échouée
                     lcdClear();
-                    lcdPrint("Conn. echouee!");
+                    lcdPrint("Connection");
+                    lcdCursor(1,9);
+                    lcdPrint("echouee");
                     delay(2500);
                     lcdClear();
                     connectToWifi();
@@ -138,7 +142,7 @@ String getPassword(String ssid)
             }
             else
             {
-                pwd = "0"; //annulation de la tentative de connection
+                pwd = "-1"; //annulation de la tentative de connection
                 break;
             }
         }
@@ -161,7 +165,7 @@ void printCurrentChar(int index){
     lcdCursor(1,6);
     lcdPrintCustomChar(1);
     lcdCursor(1,7);
-    lcdPrintChar(choices[index]);
+    lcdPrint(choices[index]);
     lcdCursor(1,8);
     lcdPrintCustomChar(0);
     lcdCursor(1,9);
@@ -179,7 +183,9 @@ boolean autoConnect(){
             {
                 //Connection réussie
                 lcdClear();
-                lcdPrint("Conn. reussie!");
+                lcdPrint("Connection");
+                lcdCursor(1,9);
+                lcdPrint("reussie");
                 delay(2500);
                 lcdClear();
                 return true;
@@ -188,7 +194,9 @@ boolean autoConnect(){
             {
                 //Connection échouée
                 lcdClear();
-                lcdPrint("Conn. echouee!");
+                lcdPrint("Connection");
+                lcdCursor(1,9);
+                lcdPrint("echouee");
                 delay(2500);
                 lcdClear();
                 return false;

@@ -61,8 +61,13 @@ WiFiEspClient WiFiEspServer::available(byte* status)
 {
 	// TODO the original method seems to handle automatic server restart
 
-	int bytes = EspDrv::availData(0);
-	if (bytes>0)
+	int bytes = EspDrv::availData(0), nRemotePort = EspDrv::getRemotePort();
+
+	if ((nRemotePort == 10002) || ((nRemotePort >= 10004) && (nRemotePort <= 10007)) || ((nRemotePort >= 10011) && (nRemotePort <= 10016)) || ((nRemotePort >= 10081) && (nRemotePort <= 10109)))
+	{
+		// Do nothing
+	}
+	else if (bytes>0)
 	{
 		LOGINFO1(F("New client"), EspDrv::_connId);
 		WiFiEspClass::allocateSocket(EspDrv::_connId);

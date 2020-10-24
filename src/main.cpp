@@ -1,8 +1,7 @@
 #include <main.h>
 
-
-void setup(){
-
+void setup()
+{
   Serial.begin(9600); //! delete after testings
   lcdSetup();
   lcdClear(); lcdPrint("Booting...");
@@ -41,5 +40,24 @@ void testingLoop() {
     lcdClear();
     lcdPrint(String(checkBtnPress().time));
   };
+
+  DynamicJsonDocument user(1024);
+  user["pseudo"] = "james";
+  user["password"] = "toto";
+  httpResp resp = apiPOST("/login", makeJsonString(user));  
+  Serial.println("-------------------");
+  Serial.println(resp.status);
+  Serial.println(resp.message);
+  Serial.println(resp.body);
+  Serial.println("-------------------");
+  
+  resp = apiGET("/user",true);  
+  Serial.println("-------------------");
+  Serial.println(resp.status);
+  Serial.println(resp.message);
+  Serial.println(resp.body);
+  String email = getObject(resp.body.substring(1,resp.body.length()-1))["email"];
+  Serial.println(email);
+  Serial.println("-------------------");
   
 };
