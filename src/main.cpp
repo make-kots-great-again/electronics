@@ -14,6 +14,7 @@ void setup()
   lcdClear();
 
   connectToWifi();
+  testingLoop();
 
 }
 

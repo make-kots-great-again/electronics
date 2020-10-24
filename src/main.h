@@ -4,14 +4,16 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-#include "lcd.h"
-#include "jsonMaker.h"
-#include "scan.h"
-#include "encoder.h"
-#include "esp.h"
-#include "httpRequest.h"
-#include "wifi_connection.h"
-#include "eepromData.h"
+#include "helpers/lcd.h"
+#include "helpers/scan.h"
+#include "helpers/encoder.h"
+#include "helpers/esp.h"
+#include "helpers/eepromData.h"
+
+#include "services/jsonMaker.h"
+#include "services/httpRequest.h"
+
+#include "components/wifi_connection.h"
 
 
 void testingLoop();

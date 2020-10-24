@@ -1,10 +1,10 @@
 #ifndef wifi_connection_h
 #define wifi_connection_h
 
-#include "esp.h"
-#include "lcd.h"
-#include "encoder.h"
-#include "eepromData.h"
+#include "helpers/esp.h"
+#include "helpers/lcd.h"
+#include "helpers/encoder.h"
+#include "helpers/eepromData.h"
 
 void connectToWifi();
 void newWifiCon();

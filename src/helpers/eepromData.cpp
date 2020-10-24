@@ -57,13 +57,13 @@ void eepromSetAllData(String ssid, String pwd, String group){
     EEPROM.write(0, dataAddrStart + ssid.length());
     EEPROM.write(1, dataAddrStart + ssid.length() + pwd.length());
     EEPROM.write(2, dataAddrStart + ssid.length() + pwd.length() + group.length());
-    for (int i = 0 ; i < ssid.length() ; i++) {
+    for (unsigned int i = 0 ; i < ssid.length() ; i++) {
         EEPROM.write(dataAddrStart + i, ssid[i]);
     }
-    for (int i = 0 ; i < pwd.length() ; i++) {
+    for (unsigned int i = 0 ; i < pwd.length() ; i++) {
         EEPROM.write(dataAddrStart + ssid.length() + i, pwd[i]);
     }
-    for (int i = 0 ; i < group.length() ; i++) {
+    for (unsigned int i = 0 ; i < group.length() ; i++) {
         EEPROM.write(dataAddrStart + ssid.length() + pwd.length() + i, group[i]);
     }
 }
@@ -81,7 +81,7 @@ String eepromGetGroup(){
 }
 
 void eepromClear(){
-    for ( int i = 0 ; i < EEPROM.length() ; i++) {
+    for (unsigned int i = 0 ; i < EEPROM.length() ; i++) {
         EEPROM.write(i, 0);
     }
 }
