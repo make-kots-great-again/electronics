@@ -12,9 +12,9 @@ void setup()
   
   delay(1500);
   lcdClear();
-  
-  connectToWifi();
-  //setQuantity();
+  //peremption();
+  //connectToWifi();
+  setQuantity();
 }
 
 

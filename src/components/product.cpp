@@ -16,14 +16,6 @@ int setQuantity()
         {
             lcdClear();
             compt = enc.value;
-            if (enc.value < 0)
-            {
-                resetEncoderValue();
-            }
-            else
-            {
-                compt = enc.value;
-            }
             lcdPrint("Quantity: " + String(compt));
         };
         if (checkBtnPress().wasPressed)
