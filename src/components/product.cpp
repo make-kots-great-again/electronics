@@ -28,7 +28,7 @@ int setQuantity()
         };
         if (checkBtnPress().wasPressed)
         {
-            if (askConfirmation())
+            if (askConfirmation())//demande de confirmation
             {
                 lcdClear();
                 lcdPrint("envoi !");
@@ -40,7 +40,6 @@ int setQuantity()
             }
         };
     };
-
     return compt;
 }
 
@@ -59,8 +58,7 @@ int peremption()
     lcdCursor(1, 0);
     lcdPrint(String(date));
     delay(2500);
-    if (askConfirmation())
-    {
+    if (askConfirmation()){//demande de confirmation
         lcdClear();
         lcdPrint("envoi !");
         return date;
