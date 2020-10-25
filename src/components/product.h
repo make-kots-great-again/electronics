@@ -8,7 +8,6 @@
 
 int setQuantity();
 int peremption();
-int test();
 int setPeremption();
 boolean askConfirmation();
 #endif

@@ -46,8 +46,8 @@ int setQuantity()
 
 /**
  * Fonction qui demande à l'utilisateur de mettre la date de péremption
- * du produit qu'il a entré
- * @return int compt
+ * du produit qu'il a entré avec confirmation de l'utilisateur
+ * @return int date
  */
 int peremption()
 {
@@ -71,10 +71,11 @@ int peremption()
     }
     return date;
 }
-int test()
-{
-}
-
+/**
+ * Fonction qui demande à l'utilisateur de mettre la quantité de produit 
+ * qu'il souhaite envoyer.
+ * @return int compt
+ */
 int setPeremption()
 {
     int compt(1);
@@ -110,7 +111,10 @@ int setPeremption()
     }
     return compt;
 }
-
+/**
+ * Demande confirmation à l'utilisateur dans le LCD
+ * @return boolean 
+ */
 boolean askConfirmation()
 {
     String yesNo = "Y";
