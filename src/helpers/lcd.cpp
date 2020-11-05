@@ -69,3 +69,44 @@ void lcdShowCursor(boolean show){
 void lcdPrintCustomChar(byte id) {
     lcd.write(id);
 }
+
+
+boolean askYesNo(String question)
+{
+    String yesNo = "Y";
+    encValue enc;
+    lcdClear();
+    lcdPrint(question +" ");
+    lcdCursor(1, 11);
+    lcdPrint("N");
+    lcdCursor(1, 4);
+    lcdPrint("Y");
+    lcdCursor(1, 4);
+    lcdShowCursor(true);
+    while (true)
+    {
+        if (!checkBtnPress().wasPressed)
+        {
+            enc = getEncoderValue();
+            if (enc.hasChanged)
+            {
+                if (enc.direction == 1)
+                {
+                    lcdCursor(1, 11);
+                    yesNo = "N";
+                }
+                else if (enc.direction == -1)
+                {
+                    lcdCursor(1, 4);
+                    yesNo = "Y";
+                }
+            }
+        }
+        else
+        {
+            lcdShowCursor(false);
+            return (yesNo == "Y") ? true : false;
+            break;
+        }
+    }
+}

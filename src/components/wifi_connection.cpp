@@ -181,7 +181,7 @@ boolean autoConnect()
 {
     if (eepromGetSSID() != "")
     {
-        if (askAutoConnect())
+        if (askYesNo("Auto-con WIFI ?"))
         {
             lcdClear();
             lcdPrint("Connexion a :");
@@ -214,44 +214,4 @@ boolean autoConnect()
         return false;
     }
     return false;
-}
-
-boolean askAutoConnect()
-{
-    String yesNo = "Y";
-    encValue enc;
-    lcdClear();
-    lcdPrint("Auto-connect ? ");
-    lcdCursor(1, 11);
-    lcdPrint("N");
-    lcdCursor(1, 4);
-    lcdPrint("Y");
-    lcdCursor(1, 4);
-    lcdShowCursor(true);
-    while (true)
-    {
-        if (!checkBtnPress().wasPressed)
-        {
-            enc = getEncoderValue();
-            if (enc.hasChanged)
-            {
-                if (enc.direction == 1)
-                {
-                    lcdCursor(1, 11);
-                    yesNo = "N";
-                }
-                else if (enc.direction == -1)
-                {
-                    lcdCursor(1, 4);
-                    yesNo = "Y";
-                }
-            }
-        }
-        else
-        {
-            lcdShowCursor(false);
-            return (yesNo == "Y") ? true : false;
-            break;
-        }
-    }
 }

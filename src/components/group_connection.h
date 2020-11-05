@@ -12,6 +12,6 @@
 void connectToGroup();
 void newGroupCon();
 boolean autoConnectGroup();
-void getJWT(String groupId);
+boolean getJWT(String groupId);
 
 #endif

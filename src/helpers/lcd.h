@@ -2,6 +2,7 @@
 #define lcd_h
 
 #include <Arduino.h>
+#include "encoder.h"
 
 #if __has_include("envMartin.h")
     #define ENV_MARTIN  true
@@ -17,5 +18,7 @@ void lcdPrint(char c);
 void lcdClearLine(int r);
 void lcdShowCursor(boolean show);
 void lcdPrintCustomChar(byte id);
+
+boolean askYesNo(String Question);
 
 #endif

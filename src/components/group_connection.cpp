@@ -1,7 +1,7 @@
 #include "group_connection.h"
 
-//String groupId = "";
-String groupId = "3eb8df17-bdd4-4130-b5e4-a79b89204f30"; //TODO supprimer apres tests
+String groupId = "";
+//String groupId = "3eb8df17-bdd4-4130-b5e4-a79b89204f30"; //! Décommenter et remplacer le string par l'id d'un groupe existant
 
 void connectToGroup()
 {
@@ -18,11 +18,12 @@ void newGroupCon()
     lcdCursor(1,0);
     lcdPrint("barre du groupe");
 
-    while(false) //TODO set to TRUE ! 
+    while(true) //! METTRE a false pour pouvoir se connecter au group sans scanner
     {   
         scanListener();
         groupId = getScannedCode();
         if(groupId != ""){
+            eepromSetGroup(groupId);
             break;
         }
     }
@@ -31,19 +32,44 @@ void newGroupCon()
 }
 
 boolean autoConnectGroup()
-{
+{   
+    String groupId = eepromGetGroup();
+    if (groupId != "")
+    {
+        if (askYesNo("Auto-con GROUP ?"))
+        {
+            lcdClear();
+            lcdPrint("Connexion au ");
+            lcdCursor(1, 0);
+            lcdPrint("groupe");
+            return getJWT(groupId);
+        }
+        return false;
+    }
     return false;
 }
 
-void getJWT(String groupId)
+boolean getJWT(String groupId)
 {   
     String endPoint = "/group/token/" + groupId;
     httpResp res = apiGET(endPoint);
-    setJWT(getObject(res.body)["token"]);
-    lcdClear();
-    lcdPrint("Connexion");
-    lcdCursor(1, 9);
-    lcdPrint("reussie");
-    delay(2500);
-    lcdClear();
+    if(res.status == 200){
+        setJWT(getObject(res.body)["token"]);
+        lcdClear();
+        lcdPrint("Connexion");
+        lcdCursor(1, 9);
+        lcdPrint("reussie");
+        delay(2500);
+        lcdClear();
+        return true;
+    }
+    else{
+        lcdClear();
+        lcdPrint("Connexion");
+        lcdCursor(1, 9);
+        lcdPrint("echouee");
+        delay(2500);
+        lcdClear();
+        return false;
+    }
 }
