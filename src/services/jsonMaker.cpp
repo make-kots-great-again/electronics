@@ -25,6 +25,5 @@ DynamicJsonDocument getObject(String jsonString){
     
     DynamicJsonDocument obj(1024);
     deserializeJson(obj, jsonString);
-
     return obj;
 }

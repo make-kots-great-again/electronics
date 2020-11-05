@@ -10,9 +10,9 @@
 #include <avr/pgmspace.h>
 #include <hidboot.h>
 
-#include "lcd.h"
 
 void scanSetup();
 void scanListener();
+String getScannedCode();
 
 #endif

@@ -1,6 +1,8 @@
 #ifndef httpRequest_h
 #define httpRequest_h
 
+#include ".env.h"
+#include "helpers/global.h"
 #include "helpers/esp.h"
 
 /**
@@ -9,12 +11,12 @@
  * @param {String} body - la réponse en elle-même 
  */
 typedef struct httpResp {
-    unsigned int status;
-    String message;
-    String body;
+    unsigned int status = 0;
+    String message = "";
+    String body = "";
 } httpResp;
 
 httpResp apiGET(String endPoint, boolean withAuth = false);
 httpResp apiPOST(String endPoint, String jsonData, boolean withAuth = false);
-void waitForResponse();
+httpResp waitForResponse();
 #endif

@@ -2,8 +2,10 @@
 
 networks nets;
 
-void connectToWifi(){
-    if(!autoConnect()){
+void connectToWifi()
+{
+    if (!autoConnect())
+    {
         newWifiCon();
     }
 }
@@ -45,16 +47,17 @@ void newWifiCon()
         else
         {
             if (checkBtnPress().time < 1000)
-            {   String net = nets.SSID[netIndex];
+            {
+                String net = nets.SSID[netIndex];
                 String pass = getPassword(net);
-                int  connStatus = connectToNetwork(net, pass);
+                int connStatus = connectToNetwork(net, pass);
                 if (connStatus == 1)
                 {
-                    eepromSetSSID_PWD(net,pass);
+                    eepromSetSSID_PWD(net, pass);
                     //Connection réussie
                     lcdClear();
-                    lcdPrint("Connection");
-                    lcdCursor(1,9);
+                    lcdPrint("Connexion");
+                    lcdCursor(1, 9);
                     lcdPrint("reussie");
                     delay(2500);
                     lcdClear();
@@ -64,8 +67,8 @@ void newWifiCon()
                 {
                     //Connection échouée
                     lcdClear();
-                    lcdPrint("Connection");
-                    lcdCursor(1,9);
+                    lcdPrint("Connexion");
+                    lcdCursor(1, 9);
                     lcdPrint("echouee");
                     delay(2500);
                     lcdClear();
@@ -88,14 +91,9 @@ void newWifiCon()
     }
 }
 
-char confirmChar=0x00+126;
+char confirmChar = 0x00 + 126;
 String confirm = String(confirmChar);
-String choices = "        " + confirm
-    + "0123456789" + confirm
-    + "abcdefghijklmnopqrstuvwxyz" + confirm
-    + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + confirm
-    + " _-?!,.:;%#*<>+=" + confirm
-    + "        ";
+String choices = "        " + confirm + "0123456789" + confirm + "abcdefghijklmnopqrstuvwxyz" + confirm + "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + confirm + " _-?!,.:;%#*<>+=" + confirm + "        ";
 
 String getPassword(String ssid)
 {
@@ -130,12 +128,16 @@ String getPassword(String ssid)
         {
             if (checkBtnPress().time < 1000)
             {
-                if (choices[charIndex] == confirmChar){
-                    lcdClear(); lcdPrint("Connection a :");
-                    lcdCursor(1,0); lcdPrint(ssid);
+                if (choices[charIndex] == confirmChar)
+                {
+                    lcdClear();
+                    lcdPrint("Connexion a :");
+                    lcdCursor(1, 0);
+                    lcdPrint(ssid);
                     break;
                 }
-                else{
+                else
+                {
                     pwd += choices[charIndex];
                     delay(100); //débounce
                 }
@@ -150,41 +152,48 @@ String getPassword(String ssid)
     return pwd;
 }
 
-void printCurrentNet(int index){
-    lcdCursor(0, 13);lcdPrint(String(index+1));
+void printCurrentNet(int index)
+{
+    lcdCursor(0, 13);
+    lcdPrint(String(index + 1));
     lcdClearLine(1);
     lcdPrint(nets.SSID[index]);
 }
 
-void printCurrentChar(int index){ 
-    String leftChoices = choices.substring(index-6,index);
-    String rightChoices = choices.substring(index+1,index+8);
+void printCurrentChar(int index)
+{
+    String leftChoices = choices.substring(index - 6, index);
+    String rightChoices = choices.substring(index + 1, index + 8);
     lcdClearLine(1);
-    lcdCursor(1,0);
+    lcdCursor(1, 0);
     lcdPrint(leftChoices);
-    lcdCursor(1,6);
+    lcdCursor(1, 6);
     lcdPrintCustomChar(1);
-    lcdCursor(1,7);
+    lcdCursor(1, 7);
     lcdPrint(choices[index]);
-    lcdCursor(1,8);
+    lcdCursor(1, 8);
     lcdPrintCustomChar(0);
-    lcdCursor(1,9);
+    lcdCursor(1, 9);
     lcdPrint(rightChoices);
 }
 
-
-boolean autoConnect(){
-    if(eepromGetSSID() != ""){
-        if(askAutoConnect()){
-            lcdClear(); lcdPrint("Connection a :");
-            lcdCursor(1,0); lcdPrint(eepromGetSSID());
-            int  connStatus = connectToNetwork(eepromGetSSID(), eepromGetPWD());
+boolean autoConnect()
+{
+    if (eepromGetSSID() != "")
+    {
+        if (askAutoConnect())
+        {
+            lcdClear();
+            lcdPrint("Connexion a :");
+            lcdCursor(1, 0);
+            lcdPrint(eepromGetSSID());
+            int connStatus = connectToNetwork(eepromGetSSID(), eepromGetPWD());
             if (connStatus == 1)
             {
                 //Connection réussie
                 lcdClear();
-                lcdPrint("Connection");
-                lcdCursor(1,9);
+                lcdPrint("Connexion");
+                lcdCursor(1, 9);
                 lcdPrint("reussie");
                 delay(2500);
                 lcdClear();
@@ -194,8 +203,8 @@ boolean autoConnect(){
             {
                 //Connection échouée
                 lcdClear();
-                lcdPrint("Connection");
-                lcdCursor(1,9);
+                lcdPrint("Connexion");
+                lcdCursor(1, 9);
                 lcdPrint("echouee");
                 delay(2500);
                 lcdClear();
@@ -203,40 +212,45 @@ boolean autoConnect(){
             }
         }
         return false;
-    }    
+    }
     return false;
 }
 
-boolean askAutoConnect(){
+boolean askAutoConnect()
+{
     String yesNo = "Y";
     encValue enc;
     lcdClear();
     lcdPrint("Auto-connect ? ");
-    lcdCursor(1,11); lcdPrint("N");
-    lcdCursor(1,4); lcdPrint("Y");
-    lcdCursor(1,4); lcdShowCursor(true); 
-    while(true){
+    lcdCursor(1, 11);
+    lcdPrint("N");
+    lcdCursor(1, 4);
+    lcdPrint("Y");
+    lcdCursor(1, 4);
+    lcdShowCursor(true);
+    while (true)
+    {
         if (!checkBtnPress().wasPressed)
+        {
+            enc = getEncoderValue();
+            if (enc.hasChanged)
             {
-                enc = getEncoderValue();
-                if (enc.hasChanged)
+                if (enc.direction == 1)
                 {
-                    if (enc.direction == 1)
-                    {
-                        lcdCursor(1,11);
-                        yesNo = "N";
-                    }
-                    else if (enc.direction == -1)
-                    {
-                        lcdCursor(1,4);
-                        yesNo = "Y";
-                    }
+                    lcdCursor(1, 11);
+                    yesNo = "N";
+                }
+                else if (enc.direction == -1)
+                {
+                    lcdCursor(1, 4);
+                    yesNo = "Y";
                 }
             }
+        }
         else
         {
             lcdShowCursor(false);
-            return (yesNo == "Y")? true : false;
+            return (yesNo == "Y") ? true : false;
             break;
         }
     }

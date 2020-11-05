@@ -14,7 +14,9 @@ void setup()
   lcdClear();
 
   connectToWifi();
-  testingLoop();
+  connectToGroup();
+  
+  //testingLoop();
 
 }
 
@@ -29,7 +31,15 @@ void loop()
  * Fonction utilisée à des fins de tests, à supprimer une fois fini
  */
 void testingLoop() {
-    scanListener();
+  scanListener();
+  String code = getScannedCode();
+  if(code != "")
+  {
+    lcdClear();
+    lcdPrint(code);
+  };
+
+
   if (getEncoderValue().hasChanged) {
     lcdClear();
     lcdPrint(String(getEncoderValue().value));
@@ -40,6 +50,7 @@ void testingLoop() {
     lcdPrint(String(checkBtnPress().time));
   };
 
+  Serial.println("-------POST USER--------");
   DynamicJsonDocument user(1024);
   user["pseudo"] = "james";
   user["password"] = "toto";
@@ -48,8 +59,12 @@ void testingLoop() {
   Serial.println(resp.status);
   Serial.println(resp.message);
   Serial.println(resp.body);
+  String usr = getObject(resp.body)["user"];
+  String token = getObject(usr)["token"];
+  setJWT(token);
   Serial.println("-------------------");
   
+  Serial.println("-------_GET USER--------");
   resp = apiGET("/user",true);  
   Serial.println("-------------------");
   Serial.println(resp.status);
@@ -58,5 +73,5 @@ void testingLoop() {
   String email = getObject(resp.body.substring(1,resp.body.length()-1))["email"];
   Serial.println(email);
   Serial.println("-------------------");
-  
+
 };

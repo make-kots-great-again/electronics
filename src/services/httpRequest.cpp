@@ -1,17 +1,24 @@
 #include "httpRequest.h"
 
+
+#ifdef DEV
+    String URLProtocol = "http://";
+    char serverURL[] = "192.168.1.63"; //IP de votre ordi 
+    int port = 8000;
+    boolean useSSL = false;
+#else
+    String URLProtocol = "https://";
+    char serverURL[] = "kotsapp.herokuapp.com";
+    int port = 443;
+    boolean useSSL = true;
+#endif
+
 WiFiEspClient client;
 
-char serverURL[] = "kotsapp.herokuapp.com";
 String apiURL = "/server/api";
 String endLine = "\r\n";
 unsigned int timeOut = 10000; //temps max d'attente de réponse du serveur (ms)
 unsigned int currentTime = 0;
-
-httpResp res;
-
-//TODO replace JWT with real jwt from EEPROM 
-const String JWT = "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbWVzQGdtYWlsLmNvbSIsInVzZXJJZCI6ImEzZTg3OGY1LWNiOGUtNGUzYi05MGM0LWVlOGY4MDU0MDc3YyIsImlhdCI6MTYwMzQ2NTI4OCwiZXhwIjoxNjA0MDcwMDg4fQ.k2s5Bp0tE95Pmn71D7IitG4weigt1R-LYwlAjcr2lDQ";
 
 /**
  * Fonction permettant d'envoyer une requête GET à notre serveur à un endpoint donnée.
@@ -20,20 +27,24 @@ const String JWT = "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbWV
  * @return {httpResp} voir doc de la structure
  */
 httpResp apiGET(String endPoint, boolean withAuth = false){
-    String reqHeaders = "GET https://"+ String(serverURL) + apiURL + endPoint + " HTTP/1.1" + endLine;
+    String reqHeaders = "GET " + URLProtocol + String(serverURL) + apiURL + endPoint + " HTTP/1.1" + endLine;
     reqHeaders += "Connection: keep-alive" + endLine;
     reqHeaders += "Host: " + String(serverURL) + endLine;
     if(withAuth){
-        reqHeaders += "Authorization: " + JWT + endLine;
+        reqHeaders += "Authorization: " + getJWT() + endLine;
     }
-    
-    if (client.connectSSL(serverURL, 443)) {
-        client.println(reqHeaders);
+    if(useSSL){
+        if (client.connectSSL(serverURL, port)) {
+            client.println(reqHeaders);
+        }
+    }
+    else{
+        if (client.connect(serverURL, port)) {
+            client.println(reqHeaders);
+        }
     }
 
-    waitForResponse();
-    
-    return res;
+    return waitForResponse();
 }
 
 /**
@@ -44,27 +55,34 @@ httpResp apiGET(String endPoint, boolean withAuth = false){
  * @return {httpResp} voir doc de la structure
  */
 httpResp apiPOST(String endPoint, String jsonData, boolean withAuth = false){
-    String reqHeaders = "POST https://"+ String(serverURL) + apiURL + endPoint + " HTTP/1.1" + endLine;
+
+    String reqHeaders = "POST " + URLProtocol + String(serverURL) + apiURL + endPoint + " HTTP/1.1" + endLine;
     reqHeaders += "Connection: keep-alive" + endLine;
     reqHeaders += "Content-Type: application/json; charset=utf-8" + endLine;
     reqHeaders += "Host: " + String(serverURL) + endLine;
     if(withAuth){
-        reqHeaders += "Authorization: " + JWT + endLine;
+        reqHeaders += "Authorization: " + getJWT() + endLine;
     }
     reqHeaders += "Content-Length: " + String(jsonData.length()) + endLine + endLine;
     reqHeaders += jsonData;
 
-    if (client.connectSSL(serverURL, 443)) {
-        client.println(reqHeaders);
+    if(useSSL){
+        if (client.connectSSL(serverURL, port)) {
+            client.println(reqHeaders);
+        }
+    }
+    else{
+        if (client.connect(serverURL, port)) {
+            client.println(reqHeaders);
+        }
     }
 
-    waitForResponse();
-    
-    return res;
+
+    return waitForResponse();
 }
 
 
-void waitForResponse(){
+httpResp waitForResponse(){
     currentTime = millis();
     int lineNumber = 0;
     byte returnNumber = 0;
@@ -72,6 +90,8 @@ void waitForResponse(){
     String statusLine = "";
     String body = "";
     String other = "";
+
+    httpResp res;
 
     while(true){
         while(client.available()) {
@@ -102,6 +122,7 @@ void waitForResponse(){
             res.status = statusLine.substring(9,12).toInt();
             res.message = statusLine.substring(13);
             res.body = body;
+            //Serial.print("---> body :");Serial.println(body);
             //Serial.println(other);
             client.stop();
             break;
@@ -114,4 +135,5 @@ void waitForResponse(){
             break;
         }
     }
+    return res;
 }
