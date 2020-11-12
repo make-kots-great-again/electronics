@@ -1,7 +1,7 @@
 #include "group_connection.h"
 
 String groupId = "";
-//String groupId = "3eb8df17-bdd4-4130-b5e4-a79b89204f30"; //! Décommenter et remplacer le string par l'id d'un groupe existant
+//String groupId = "2bb17c57b2e1"; //! Décommenter et remplacer le string par le groupBarCode d'un groupe existant
 
 void connectToGroup()
 {
