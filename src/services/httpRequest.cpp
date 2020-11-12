@@ -3,7 +3,7 @@
 
 #ifdef DEV
     String URLProtocol = "http://";
-    char serverURL[] = "192.168.1.63"; //IP de votre ordi 
+    char serverURL[] = "192.168.1.58"; //IP de votre ordi 
     int port = 8000;
     boolean useSSL = false;
 #else
