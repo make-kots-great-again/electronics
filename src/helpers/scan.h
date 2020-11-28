@@ -13,6 +13,7 @@
 
 void scanSetup();
 void scanListener();
+void scanListener_STOP();
 String getScannedCode();
 
 #endif

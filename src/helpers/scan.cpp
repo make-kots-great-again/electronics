@@ -65,6 +65,16 @@ void scanListener()
   Usb.Task();
 }
 
+void scanListener_STOP()
+{
+  unsigned int curTime = millis();
+  unsigned int elTime = millis();
+  while(curTime - elTime < 500){
+      curTime = millis();
+      scanListener();
+  }
+}
+
 String getScannedCode()
 {
   if (codeFlag)

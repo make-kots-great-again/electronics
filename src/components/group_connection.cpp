@@ -1,7 +1,7 @@
 #include "group_connection.h"
 
 String groupId = "";
-//String groupId = "2bb17c57b2e1"; //! Décommenter et remplacer le string par le groupBarCode d'un groupe existant
+//String groupId = "f0ae70e4939a"; //! Décommenter et remplacer le string par le groupBarCode d'un groupe existant
 
 void connectToGroup()
 {
@@ -23,6 +23,8 @@ void newGroupCon()
         scanListener();
         groupId = getScannedCode();
         if(groupId != ""){
+            scanListener_STOP();
+            displayGroupCon();
             eepromSetGroup(groupId);
             break;
         }
@@ -38,10 +40,7 @@ boolean autoConnectGroup()
     {
         if (askYesNo("Auto-con GROUP ?"))
         {
-            lcdClear();
-            lcdPrint("Connexion au ");
-            lcdCursor(1, 0);
-            lcdPrint("groupe");
+            displayGroupCon();
             return getJWT(groupId);
         }
         return false;
@@ -72,4 +71,12 @@ boolean getJWT(String groupId)
         lcdClear();
         return false;
     }
+}
+
+
+void displayGroupCon(){
+    lcdClear();
+    lcdPrint("Connexion au ");
+    lcdCursor(1, 0);
+    lcdPrint("groupe");
 }

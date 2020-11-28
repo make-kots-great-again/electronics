@@ -17,7 +17,8 @@
 #include "components/wifi_connection.h"
 #include "components/group_connection.h"
 
-
-void testingLoop();
+void scannerTest();
+void encoderTest();
+void espAPITest();
 
 #endif

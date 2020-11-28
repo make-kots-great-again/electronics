@@ -13,5 +13,6 @@ void connectToGroup();
 void newGroupCon();
 boolean autoConnectGroup();
 boolean getJWT(String groupId);
+void displayGroupCon();
 
 #endif

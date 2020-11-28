@@ -16,21 +16,22 @@ void setup()
   connectToWifi();
   connectToGroup();
   
-  //testingLoop();
+  //espAPITest();
 
 }
 
 
 void loop()
 {
-
-  //testingLoop();
+  //scannerTest();
+  //encoderTest();
 }
 
 /**
- * Fonction utilisée à des fins de tests, à supprimer une fois fini
+ * Fonctions utilisée à des fins de tests, à supprimer une fois fini
  */
-void testingLoop() {
+
+void scannerTest(){
   scanListener();
   String code = getScannedCode();
   if(code != "")
@@ -38,8 +39,9 @@ void testingLoop() {
     lcdClear();
     lcdPrint(code);
   };
+}
 
-
+void encoderTest(){
   if (getEncoderValue().hasChanged) {
     lcdClear();
     lcdPrint(String(getEncoderValue().value));
@@ -49,7 +51,9 @@ void testingLoop() {
     lcdClear();
     lcdPrint(String(checkBtnPress().time));
   };
+}
 
+void espAPITest() {
   Serial.println("-------POST USER--------");
   DynamicJsonDocument user(1024);
   user["pseudo"] = "james";
@@ -73,5 +77,4 @@ void testingLoop() {
   String email = getObject(resp.body.substring(1,resp.body.length()-1))["email"];
   Serial.println(email);
   Serial.println("-------------------");
-
 };
