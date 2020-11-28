@@ -16,6 +16,7 @@
 
 #include "components/wifi_connection.h"
 #include "components/group_connection.h"
+#include "components/product_scan.h"
 
 void scannerTest();
 void encoderTest();

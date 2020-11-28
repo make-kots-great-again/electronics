@@ -3,12 +3,12 @@
 
 #ifdef DEV
     String URLProtocol = "http://";
-    char serverURL[] = "192.168.1.58"; //IP de votre ordi 
-    int port = 8000;
+    char serverURL[] = BACKEND_DEV;
+    int port = 8001;
     boolean useSSL = false;
 #else
     String URLProtocol = "https://";
-    char serverURL[] = "kotsapp.herokuapp.com";
+    char serverURL[] = BACKEND_PROD;
     int port = 443;
     boolean useSSL = true;
 #endif
@@ -17,8 +17,8 @@ WiFiEspClient client;
 
 String apiURL = "/server/api";
 String endLine = "\r\n";
-unsigned int timeOut = 10000; //temps max d'attente de réponse du serveur (ms)
-unsigned int currentTime = 0;
+unsigned int timeOut = 20000; //temps max d'attente de réponse du serveur (ms)
+unsigned long currentTime = 0;
 
 /**
  * Fonction permettant d'envoyer une requête GET à notre serveur à un endpoint donnée.

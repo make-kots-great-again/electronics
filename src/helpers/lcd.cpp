@@ -108,5 +108,6 @@ boolean askYesNo(String question)
             return (yesNo == "Y") ? true : false;
             break;
         }
+        scanListener(); //to prevent scan hangup 
     }
 }

@@ -15,6 +15,7 @@ void setup()
 
   connectToWifi();
   connectToGroup();
+  productScan();
   
   //espAPITest();
 

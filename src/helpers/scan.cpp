@@ -67,10 +67,8 @@ void scanListener()
 
 void scanListener_STOP()
 {
-  unsigned int curTime = millis();
-  unsigned int elTime = millis();
-  while(curTime - elTime < 500){
-      curTime = millis();
+  unsigned long elTime = millis();
+  while(millis() - elTime < 500){
       scanListener();
   }
 }

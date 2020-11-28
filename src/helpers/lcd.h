@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include "encoder.h"
+#include "scan.h"
 
 #if __has_include("envMartin.h")
     #define ENV_MARTIN  true
