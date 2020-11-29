@@ -55,23 +55,13 @@ void newWifiCon()
                 {
                     eepromSetSSID_PWD(net, pass);
                     //Connection réussie
-                    lcdClear();
-                    lcdPrint("Connexion");
-                    lcdCursor(1, 9);
-                    lcdPrint("reussie");
-                    delay(2500);
-                    lcdClear();
+                    dispCon_OK();
                     break;
                 }
                 else if (connStatus == -1)
                 {
                     //Connection échouée
-                    lcdClear();
-                    lcdPrint("Connexion");
-                    lcdCursor(1, 9);
-                    lcdPrint("echouee");
-                    delay(2500);
-                    lcdClear();
+                    dispCon_NOK();
                     connectToWifi();
                     break;
                 }
@@ -131,6 +121,7 @@ String getPassword(String ssid)
                 if (choices[charIndex] == confirmChar)
                 {
                     lcdClear();
+                    lcdCursor(0, 1);
                     lcdPrint("Connexion a :");
                     lcdCursor(1, 0);
                     lcdPrint(ssid);
@@ -184,6 +175,7 @@ boolean autoConnect()
         if (askYesNo("Auto-con WIFI ?"))
         {
             lcdClear();
+            lcdCursor(0, 1);
             lcdPrint("Connexion a :");
             lcdCursor(1, 0);
             lcdPrint(eepromGetSSID());
@@ -191,23 +183,13 @@ boolean autoConnect()
             if (connStatus == 1)
             {
                 //Connection réussie
-                lcdClear();
-                lcdPrint("Connexion");
-                lcdCursor(1, 9);
-                lcdPrint("reussie");
-                delay(2500);
-                lcdClear();
+                dispCon_OK();
                 return true;
             }
             else if (connStatus == -1)
             {
                 //Connection échouée
-                lcdClear();
-                lcdPrint("Connexion");
-                lcdCursor(1, 9);
-                lcdPrint("echouee");
-                delay(2500);
-                lcdClear();
+                dispCon_NOK();
                 return false;
             }
         }

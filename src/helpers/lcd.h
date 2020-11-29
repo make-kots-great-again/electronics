@@ -21,5 +21,7 @@ void lcdShowCursor(boolean show);
 void lcdPrintCustomChar(byte id);
 
 boolean askYesNo(String Question);
+void dispCon_OK();
+void dispCon_NOK();
 
 #endif

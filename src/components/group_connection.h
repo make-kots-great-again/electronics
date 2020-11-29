@@ -6,11 +6,13 @@
 #include "helpers/lcd.h"
 #include "helpers/encoder.h"
 #include "helpers/eepromData.h"
-#include "services/httpRequest.h"
-#include "services/jsonMaker.h"
+#include "helpers/httpRequest.h"
+#include "helpers/jsonMaker.h"
+
+#include "services/group_service.h"
 
 void connectToGroup();
-void newGroupCon();
+boolean newGroupCon();
 boolean autoConnectGroup();
 boolean getJWT(String groupId);
 void displayGroupCon();

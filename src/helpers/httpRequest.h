@@ -2,8 +2,8 @@
 #define httpRequest_h
 
 #include ".env.h"
-#include "helpers/global.h"
-#include "helpers/esp.h"
+#include "global.h"
+#include "esp.h"
 
 /**
  * @param {unsigned-int} status - le statut de la requête: 200,404,500,...

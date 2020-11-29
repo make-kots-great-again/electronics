@@ -4,7 +4,7 @@ void setup()
 {
   Serial.begin(9600); //! delete after testings
   lcdSetup();
-  lcdClear(); lcdPrint("Booting...");
+  lcdClear(); lcdCursor(0, 3); lcdPrint("Booting...");
   scanSetup();
   encoderSetup();
   espSetup();

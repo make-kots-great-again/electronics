@@ -111,3 +111,25 @@ boolean askYesNo(String question)
         scanListener(); //to prevent scan hangup 
     }
 }
+
+void dispCon_OK()
+{
+    lcdClear();
+    lcdCursor(0, 3);
+    lcdPrint("Connexion");
+    lcdCursor(1, 4);
+    lcdPrint("reussie");
+    delay(2500);
+    lcdClear();
+}
+
+void dispCon_NOK()
+{
+    lcdClear();
+    lcdCursor(0, 3);
+    lcdPrint("Connexion");
+    lcdCursor(1, 4);
+    lcdPrint("echouee");
+    delay(2500);
+    lcdClear();
+}

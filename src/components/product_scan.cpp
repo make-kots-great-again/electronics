@@ -45,6 +45,7 @@ void productScan()
             else
             {
                 lcdClear();
+                lcdCursor(0, 3);
                 lcdPrint("Ce produit");
                 lcdCursor(1, 0);
                 lcdPrint("n'existe pas..");
@@ -58,21 +59,6 @@ void productScan()
     }
 }
 
-String getProdName(String prodId)
-{
-    Serial.println(prodId);
-    String endPoint = "/product/" + prodId;
-    httpResp res = apiGET(endPoint, true);
-    Serial.println(res.status);
-
-    if (res.status == 200)
-    {
-        return getObject(getObject(res.body)["product"])["product_name"];
-    }
-
-    return "error";
-}
-
 void addProduct(String productId,int quantity, int peremtion)
 {
     product prod;
@@ -83,23 +69,19 @@ void addProduct(String productId,int quantity, int peremtion)
     if (!sendToReserve(prod))
     {
         lcdClear();
+        lcdCursor(0, 4);
         lcdPrint("Echec de ");
-        lcdCursor(1, 8);
+        lcdCursor(1, 4);
         lcdPrint("l'envoie");
         delay(2500);
     }
 }
 
-boolean sendToReserve(product prod)
-{
-    //TODO
-    return false;
-}
-
 void displayReadyToScan()
 {
     lcdClear();
+    lcdCursor(0, 3);
     lcdPrint("Scannez un");
-    lcdCursor(1, 9);
+    lcdCursor(1, 4);
     lcdPrint("produit !");
 }
