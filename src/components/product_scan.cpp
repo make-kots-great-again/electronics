@@ -5,7 +5,6 @@ void productScan()
     String productId = "";
     int quantity = 0;
     int peremtion = 0;
-    product prod;
 
     displayReadyToScan();
 
@@ -22,25 +21,22 @@ void productScan()
                 if (askYesNo(productName + " ?")) //TODO, scroll product name!
                 {
                     quantity = setQuantity();
-                    if (quantity != 0)
+                    if (quantity > 0)
                     {
                         peremtion = setPeremption();
                         if (peremtion != 0)
                         {
                             if (askYesNo("Ajouter produit?"))
                             {
-                                prod.id = productId;
-                                prod.quantity = quantity;
-                                prod.peremption = peremtion;
-                                if (!sendToReserve(prod))
-                                {
-                                    lcdClear();
-                                    lcdPrint("Echec de ");
-                                    lcdCursor(1, 8);
-                                    lcdPrint("l'envoie");
-                                    delay(2500);
-                                }
+                                addProduct(productId,quantity,peremtion);
                             }
+                        }
+                    }
+                    else if (quantity < 0)
+                    {
+                        if (askYesNo("Retirer produit?"))
+                        {
+                            addProduct(productId,quantity,peremtion);
                         }
                     }
                 }
@@ -75,6 +71,23 @@ String getProdName(String prodId)
     }
 
     return "error";
+}
+
+void addProduct(String productId,int quantity, int peremtion)
+{
+    product prod;
+
+    prod.id = productId;
+    prod.quantity = quantity;
+    prod.peremption = peremtion;
+    if (!sendToReserve(prod))
+    {
+        lcdClear();
+        lcdPrint("Echec de ");
+        lcdCursor(1, 8);
+        lcdPrint("l'envoie");
+        delay(2500);
+    }
 }
 
 boolean sendToReserve(product prod)

@@ -20,6 +20,7 @@ typedef struct product
 void productScan();
 String getProdName(String prodId);
 boolean sendToReserve(product prod);
+void addProduct(String productId,int quantity, int peremtion);
 void displayReadyToScan();
 
 #endif
