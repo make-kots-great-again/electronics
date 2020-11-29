@@ -121,7 +121,6 @@ String getPassword(String ssid)
                 if (choices[charIndex] == confirmChar)
                 {
                     lcdClear();
-                    lcdCursor(0, 1);
                     lcdPrint("Connexion a :");
                     lcdCursor(1, 0);
                     lcdPrint(ssid);
@@ -175,7 +174,6 @@ boolean autoConnect()
         if (askYesNo("Auto-con WIFI ?"))
         {
             lcdClear();
-            lcdCursor(0, 1);
             lcdPrint("Connexion a :");
             lcdCursor(1, 0);
             lcdPrint(eepromGetSSID());

@@ -29,6 +29,28 @@ byte leftBar[8] = {
   B10000,
 };
 
+byte _Y_[8] = {
+  B10001,
+  B10001,
+  B10001,
+  B01010,
+  B00100,
+  B00100,
+  B00100,
+  B11111,
+};
+
+byte _N_[8] = {
+  B10001,
+  B10001,
+  B11001,
+  B10101,
+  B10011,
+  B10001,
+  B10001,
+  B11111,
+};
+
 
 void lcdSetup() {
     lcd.init();
@@ -38,6 +60,8 @@ void lcdSetup() {
     lcd.setCursor(0, 0); 
     lcd.createChar(0, leftBar);
     lcd.createChar(1, rightBar);
+    lcd.createChar(2, _Y_);
+    lcd.createChar(3, _N_);
 };
 
 void lcdPrint(String s){
@@ -75,14 +99,18 @@ boolean askYesNo(String question)
 {
     String yesNo = "Y";
     encValue enc;
+    int qLen = question.length();
+    unsigned long prevTime = millis();
+    int scrollCount = 0;
+    unsigned int scrollPeriod = 400;
+
     lcdClear();
     lcdPrint(question +" ");
+    lcdCursor(1, 4);
+    lcdPrintCustomChar(2);
     lcdCursor(1, 11);
     lcdPrint("N");
-    lcdCursor(1, 4);
-    lcdPrint("Y");
-    lcdCursor(1, 4);
-    lcdShowCursor(true);
+
     while (true)
     {
         if (!checkBtnPress().wasPressed)
@@ -92,22 +120,47 @@ boolean askYesNo(String question)
             {
                 if (enc.direction == 1)
                 {
+                    lcdCursor(1, 4);
+                    lcdPrint("Y");
                     lcdCursor(1, 11);
+                    lcdPrintCustomChar(3);
                     yesNo = "N";
                 }
                 else if (enc.direction == -1)
                 {
                     lcdCursor(1, 4);
+                    lcdPrintCustomChar(2);
+                    lcdCursor(1, 11);
+                    lcdPrint("N");
                     yesNo = "Y";
                 }
             }
         }
         else
         {
-            lcdShowCursor(false);
             return (yesNo == "Y") ? true : false;
             break;
         }
+
+        if(qLen > 16)
+        {
+            if(millis()-prevTime > scrollPeriod)
+            {   
+                if (scrollCount == qLen-15){
+                    scrollCount = 0;
+                    scrollPeriod = 2000;
+                }
+                else
+                {
+                    lcdClearLine(0);
+                    lcdPrint(question.substring(scrollCount));
+                    scrollPeriod = 400;
+                    scrollCount++;
+                }
+                prevTime = millis();
+            }
+        }
+
         scanListener(); //to prevent scan hangup 
     }
 }

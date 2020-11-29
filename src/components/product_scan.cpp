@@ -18,7 +18,7 @@ void productScan()
             String productName = getProdName(productId);
             if (productName != "error")
             {
-                if (askYesNo(productName + " ?")) //TODO, scroll product name!
+                if (askYesNo(productName + " ?"))
                 {
                     quantity = setQuantity();
                     if (quantity > 0)

@@ -20,7 +20,7 @@ void lcdClearLine(int r);
 void lcdShowCursor(boolean show);
 void lcdPrintCustomChar(byte id);
 
-boolean askYesNo(String Question);
+boolean askYesNo(String question);
 void dispCon_OK();
 void dispCon_NOK();
 

@@ -53,7 +53,6 @@ boolean autoConnectGroup()
 
 void displayGroupCon(){
     lcdClear();
-    lcdCursor(0, 1);
     lcdPrint("Connexion au ");
     lcdCursor(1, 0);
     lcdPrint("groupe");
