@@ -13,8 +13,24 @@ String getProdName(String prodId)
     return "error";
 }
 
-boolean sendToReserve(product prod)
+boolean sendToReserve(product product, String groupId)
 {
-    //TODO
+    String endPoint = "/reserve/" + groupId;
+    Serial.println(endPoint);
+    DynamicJsonDocument prod(1024);
+    prod["code"] = product.id.toInt();
+    prod["quantity"] = product.quantity;
+    prod["expiringIn"] = product.peremption;
+    String body = makeJsonString(prod);
+    Serial.println(body);
+
+    httpResp res = apiPOST(endPoint, body, true);  
+    Serial.println(res.status);
+    Serial.println(res.message);
+    if (res.status == 200)
+    {
+        return true;
+    }
+
     return false;
 }

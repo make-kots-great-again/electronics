@@ -57,28 +57,41 @@ httpResp apiGET(String endPoint, boolean withAuth = false){
 httpResp apiPOST(String endPoint, String jsonData, boolean withAuth = false){
 
     String reqHeaders = "POST " + URLProtocol + String(serverURL) + apiURL + endPoint + " HTTP/1.1" + endLine;
-    reqHeaders += "Connection: keep-alive" + endLine;
-    reqHeaders += "Content-Type: application/json; charset=utf-8" + endLine;
     reqHeaders += "Host: " + String(serverURL) + endLine;
     if(withAuth){
         reqHeaders += "Authorization: " + getJWT() + endLine;
     }
+    reqHeaders += "Connection: keep-alive" + endLine;
+    reqHeaders += "Content-type: application/json; charset=utf-8" + endLine;
     reqHeaders += "Content-Length: " + String(jsonData.length()) + endLine + endLine;
     reqHeaders += jsonData;
+
+    httpResp res;
 
     if(useSSL){
         if (client.connectSSL(serverURL, port)) {
             client.println(reqHeaders);
+        }
+        else{
+            res.status = 400;
+            res.message = "not ok";
         }
     }
     else{
         if (client.connect(serverURL, port)) {
             client.println(reqHeaders);
         }
+        else{
+            res.status = 400;
+            res.message = "not ok";
+        }
     }
 
-
-    return waitForResponse();
+    res.status = 200;
+    res.message = "ok";
+    client.stop();
+    //return waitForResponse();
+    return res;
 }
 
 
@@ -96,6 +109,7 @@ httpResp waitForResponse(){
     while(true){
         while(client.available()) {
             char c = client.read();
+            //Serial.print(c);
             if(c == '\r'){
                 lineNumber ++;
                 returnNumber ++;

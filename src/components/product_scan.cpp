@@ -1,7 +1,11 @@
 #include "product_scan.h"
 
+String groupCode  = "";
+
 void productScan()
 {
+    groupCode = eepromGetGroup();
+    Serial.println(groupCode);
     String productId = "";
     int quantity = 0;
     int peremtion = 0;
@@ -66,7 +70,7 @@ void addProduct(String productId,int quantity, int peremtion)
     prod.id = productId;
     prod.quantity = quantity;
     prod.peremption = peremtion;
-    if (!sendToReserve(prod))
+    if (!sendToReserve(prod,groupCode))
     {
         lcdClear();
         lcdCursor(0, 4);
@@ -74,6 +78,13 @@ void addProduct(String productId,int quantity, int peremtion)
         lcdCursor(1, 4);
         lcdPrint("l'envoie");
         delay(2500);
+    }
+    else{
+        lcdClear();
+        lcdCursor(0, 7);
+        lcdPrint("ok");
+        delay(1000);
+
     }
 }
 

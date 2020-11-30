@@ -12,6 +12,6 @@ typedef struct product
 } product;
 
 String getProdName(String prodId);
-boolean sendToReserve(product prod);
+boolean sendToReserve(product product, String groupId);
 
 #endif

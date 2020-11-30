@@ -8,6 +8,7 @@
 #include "helpers/setProductInfo.h"
 #include "helpers/httpRequest.h"
 #include "helpers/jsonMaker.h"
+#include "helpers/eepromData.h"
 
 #include "services/product_service.h"
 
