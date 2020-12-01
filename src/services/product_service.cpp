@@ -7,7 +7,7 @@ String getProdName(String prodId)
 
     if (res.status == 200)
     {
-        return getObject(getObject(res.body)["product"])["product_name"];
+        return getObject(getObject(res.body)["productInfo"])["product_name"];
     }
 
     return "error";
@@ -16,17 +16,13 @@ String getProdName(String prodId)
 boolean sendToReserve(product product, String groupId)
 {
     String endPoint = "/reserve/" + groupId;
-    Serial.println(endPoint);
     DynamicJsonDocument prod(1024);
     prod["code"] = product.id.toInt();
     prod["quantity"] = product.quantity;
     prod["expiringIn"] = product.peremption;
     String body = makeJsonString(prod);
-    Serial.println(body);
 
     httpResp res = apiPOST(endPoint, body, true);  
-    Serial.println(res.status);
-    Serial.println(res.message);
     if (res.status == 200)
     {
         return true;
